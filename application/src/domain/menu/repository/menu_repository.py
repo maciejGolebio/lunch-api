@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 
 from domain.menu.entity.menu import Menu, MenuId
+from domain.menu.entity.menu_position import MenuPosition, MenuPositionId
 
 
 class IMenuRepository(ABC):
@@ -18,7 +19,7 @@ class IMenuRepository(ABC):
         """
 
     @abstractmethod
-    def create(self, menu: Menu) -> Menu:
+    def create(self, menu: Menu) -> None:
         """
             Create new menu
         """
@@ -33,4 +34,22 @@ class IMenuRepository(ABC):
     def delete(self, menu_id: MenuId) -> None:
         """
             Delete menu
+        """
+
+    @abstractmethod
+    def create_position(self, menu_id: MenuId, menu_position: MenuPosition) -> None:
+        """
+            Create new position in menu
+        """
+
+    @abstractmethod
+    def update_position(self, menu_id: MenuId, menu_position: MenuPosition) -> None:
+        """
+            Update position in menu
+        """
+
+    @abstractmethod
+    def delete_position(self, menu_id: MenuId, menu_position_Id: MenuPositionId) -> None:
+        """
+            Delete position from menu
         """

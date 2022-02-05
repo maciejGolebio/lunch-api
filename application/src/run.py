@@ -1,5 +1,5 @@
 from bootsrap.container import Container, get_mediator
-from domain.menu.command_handlers import command_handlers
+from application.src.domain.menu.command_handlers import handlers_menu
 from domain.menu.commands.menu_commands import CreateMenuCommand
 from domain.menu.entity.menu import Menu
 
@@ -11,9 +11,9 @@ if __name__ == "__main__":
     import asyncio
     
     bus = get_mediator()
-    bus.register(command_handlers.create_menu_command_handler)
+    bus.register(handlers_menu.create_menu_command_handler)
     container = Container()
 
-    container.wire(modules=[command_handlers])
+    container.wire(modules=[handlers_menu])
     container.config.arg.from_value("container argument")
     asyncio.run(main(bus))

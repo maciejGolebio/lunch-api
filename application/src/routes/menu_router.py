@@ -14,20 +14,20 @@ router = APIRouter(tags=["menu"])
 
 @router.post("/menu", response_model=None)
 @inject
-async def create(menu: InputMenu, mediator: LocalRequestBus = Depends(get_mediator)) -> None:
+async def create(menu: InputMenu, mediator: LocalRequestBus = Depends(get_mediator)) -> MenuId:
     return await mediator.execute(CreateMenuCommand(menu=Menu(**menu.dict())))
-    
+
 
 @router.put("/menu/{menu_id}", response_model=Menu)
 @inject
-async def update_menu(menu_id: MenuId, menu: InputMenu, mediator: LocalRequestBus = Depends(get_mediator)) -> None:
-    await mediator.execute(UpdateMenuCommand(menu_id=menu_id, menu=menu))
+async def update_menu(menu_id: MenuId, menu: InputMenu, mediator: LocalRequestBus = Depends(get_mediator)) -> MenuId:
+    return await mediator.execute(UpdateMenuCommand(menu_id=menu_id, menu=menu))
 
 
 @router.delete("/menu/{menu_id}", response_model=None)
 @inject
-async def delete_menu(menu_id: MenuId, mediator: LocalRequestBus = Depends(get_mediator)) -> None:
-    await mediator.execute(DeleteMenuCommand(menu_id=menu_id))
+async def delete_menu(menu_id: MenuId, mediator: LocalRequestBus = Depends(get_mediator)) -> MenuId:
+    return await mediator.execute(DeleteMenuCommand(menu_id=menu_id))
 
 
 @router.get("/menu/{menu_id}", response_model=Menu)
