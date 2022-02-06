@@ -8,8 +8,8 @@ MenuPositionId = NewType('MenuPositionId', str)
 class InputMenuPosition(BaseModel):
     name: str
     description: str
-    price: decimal.Decimal = Field(
-        default_factory=lambda: 0.00, decimal_places=2, gt=0
+    price: float = Field(
+        default_factory=lambda: 0.00, gt=0
     )
 
 
