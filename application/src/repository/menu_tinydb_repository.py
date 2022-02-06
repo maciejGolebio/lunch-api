@@ -19,7 +19,7 @@ class MenuTinyDBRepository(TinyDBBase, menu_repository.IMenuRepository):
     def get_by_id(self, menu_id: MenuId):
         query = Query()
         # should retrun one elem list
-        result = self.client.search(query.id == menu_id)
+        result = self.client.search(query.menu_id == menu_id)
         if len(result) == 0:
             return None
         return Menu.parse_obj(result[0])
@@ -29,7 +29,7 @@ class MenuTinyDBRepository(TinyDBBase, menu_repository.IMenuRepository):
 
     def update(self, menu_id: MenuId, menu: InputMenu) -> None:
         query = Query()
-        self.client.update(menu.dict(), query.id == menu_id)
+        self.client.update(menu.dict(), query.menu_id == menu_id)
 
     def delete(self, menu_id: MenuId) -> None:
         query = Query()
